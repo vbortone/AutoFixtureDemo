@@ -14,7 +14,8 @@ namespace AutoFixtureDemo.Core
         public string ShippingId { get; set; }
         
         public Address ShippingAddress { get; set; } = new Address();
-        public List<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+        public List<OrderDetail> OrderDetails { get; set; } 
+            = new List<OrderDetail>();
 
         public void PlaceOrder()
         {
@@ -35,10 +36,15 @@ namespace AutoFixtureDemo.Core
 
             if (price <= 0m)
             {
-                throw new ArgumentOutOfRangeException(nameof(price), "Price must be greater than zero");
+                throw new ArgumentOutOfRangeException(nameof(price), 
+                    "Price must be greater than zero");
             }
 
-            var orderDetail = OrderDetails.SingleOrDefault(e => string.Equals(e.Product.Name, product.Name, StringComparison.CurrentCultureIgnoreCase));
+            var orderDetail = OrderDetails.SingleOrDefault(
+                e => string.Equals(e.Product.Name, 
+                    product.Name, 
+                    StringComparison.CurrentCultureIgnoreCase));
+
             if (orderDetail == null)
             {
                 orderDetail = new OrderDetail {Product = product};
